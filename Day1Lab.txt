@@ -1,3 +1,62 @@
+Lab12 - panic + recover + defer
+            package main
+            import (
+            	"fmt"
+            	)
+            func main(){
+                fmt.Println("main start")
+            	inputprocess()
+            	fmt.Println("main completing...")
+            	}
+             
+            func inputprocess(){
+            	defer func(){
+            		fmt.Println("in test")
+            		r := recover()
+            		if r != nil {
+            			fmt.Println("Recovered  inputprocess in function test ", r)
+            		}
+            	}()
+            	fmt.Println("------------input process start")
+            	var count int
+            	fmt.Println("Count = " , count)
+            	fmt.Println("Please enter a number :")
+            	no1, err:=fmt.Scan(&count)
+            	fmt.Println("Count = " , count)
+            	fmt.Println("No1 = " , no1 , "  , Error = ", err)
+            	if err!= nil{
+            		fmt.Println("Exception... ", err)
+            		panic("Problem with input..........")
+            	}
+            	fmt.Println("------------input process end")
+            }
+            
+
+Lab11 - panic 
+            package main
+            import (
+            	"fmt"
+            	)
+            func main(){
+                fmt.Println("main start")
+            	inputprocess()
+            	fmt.Println("main completing...")
+            	}
+             
+            func inputprocess(){
+            	fmt.Println("------------input process start")
+            	var count int
+            	fmt.Println("Count = " , count)
+            	fmt.Println("Please enter a number :")
+            	no1, err:=fmt.Scan(&count)
+            	fmt.Println("Count = " , count)
+            	fmt.Println("No1 = " , no1 , "  , Error = ", err)
+            	if err!= nil{
+            		fmt.Println("Exception... ", err)
+            		panic("Problm with input..........")
+            	}
+            	fmt.Println("------------input process end")
+            }
 Lab10 - receiver methods
             package main
             import (
