@@ -1,3 +1,26 @@
+Lab8 - struct
+            Modify code to have two functions 
+                        1. shift - accept two inputs and modify point accordingly
+                        2. print - just to print point details
+            package main
+            import (
+            	"fmt"
+            	)
+            func main(){
+                p1 := Point{10,50}
+            	fmt.Println("p1 = "  , p1)
+            	p1 = Point{Y:10}
+            	fmt.Println("p1 = "  , p1)
+            	p1.X = 4000
+            	fmt.Println("p1 = "  , p1)
+            	}
+            
+            type Point struct {
+            	X int
+            	Y int
+            }
+
+
 Lab7 - defer
             package main
             import (
