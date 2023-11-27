@@ -1,3 +1,30 @@
+Lab10 - receiver methods
+            package main
+            import (
+            	"fmt"
+            
+            )
+            func main(){
+            	p1 := Point{10,40}
+            	fmt.Println("P1 = " , p1)
+            	var trans Transform
+            	trans = p1
+            	trans.shift()
+            	p1.shift()
+            	fmt.Println("P1 = " , p1)
+            	
+            }
+            func (p Point) shift()  {
+            	fmt.Println("Shift invoked ...")	
+            }
+            type Point struct {
+            	X int
+            	Y int
+            }
+            type Transform interface {
+            	shift() 
+            }
+
 Lab9 - Create Struct as Emp
             Empno int, Ename String, Salary int
             2 functions
