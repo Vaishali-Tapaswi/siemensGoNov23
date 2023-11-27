@@ -1,3 +1,29 @@
+Lab3 - write 4 functions add, divide, sub, mult and invoke 
+            
+Lab3 - function declaration and invocation
+    package main
+    import (
+    	"fmt"
+    	)
+    func main(){
+       sum := add(10,20)
+       fmt.Println("Sum = ", sum)
+    	}
+    func add(n1 int, n2 int) int {
+    	return n1+ n2
+    }
+    	
+Lab2 - := (declare and initialize), multiple variables and types on single line
+    package main
+    import (
+    	"fmt"
+    	)
+    func main(){
+       no1, no2 := 200, 4000
+       fmt.Println("No1 = " , no1 , " No2 = " , no2)
+       ans := no1 + no2
+       fmt.Printf("Ans = %d ", ans)
+    }
 Lab1 -   
     package main
     import (
