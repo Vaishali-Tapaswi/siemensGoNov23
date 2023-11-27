@@ -1,3 +1,33 @@
+Lab5 - show fib series of 10 numbers 
+Lab4 -  named return, multiple returns, _
+            package main
+            import (
+            	"fmt"
+            	)
+            func main(){
+                fmt.Println("Hello World !!")
+            	sum, sub, mult, div:= calc(100,10)
+            	fmt.Println(sum, sub, mult, div )
+            	sum1, sub1, _, _:= calc(1000,100)
+            	fmt.Println(sum1, sub1)
+            	s1, s2 := "first", "second"
+            	s1, s22 := swap(s1, s2)
+            	fmt.Println("Swapped ", s1, s22)
+            	}
+            /*	
+            func calc(n1 int, n2 int) (int, int, int, int){
+            	return n1+n2, n1-n2, n1*n2, n1/n2
+            }
+            */
+            // named return
+            func calc(n1, n2 int) (sum, sub, mult, div int){
+            	sum, sub, mult, div = n1+n2, n1-n2, n1*n2, n1/n2
+            	return 
+            }
+            func swap (s1, s2 string)  (string, string){
+            	return s2, s1
+            }
+
 Lab3 - write 4 functions add, divide, sub, mult and invoke 
             
 Lab3 - function declaration and invocation
