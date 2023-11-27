@@ -1,0 +1,15 @@
+Lab1 -   
+    package main
+    import (
+    	"fmt"
+    	)
+    func main(){
+        fmt.Println("Hello World !!")
+    	}
+
+  cmd>go build Lab1.go -> will create exe
+  cmd>go run Lab1.go -> will create exe in temp folder and run it
+  try putting { on next line and check error)
+  browser -> check go docs for fmt
+
+    	
