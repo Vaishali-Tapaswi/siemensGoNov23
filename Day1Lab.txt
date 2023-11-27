@@ -1,3 +1,47 @@
+Lab7 - defer
+            package main
+            import (
+            	"fmt"
+            )
+            func main(){
+            	str := "Simple"
+            	defer fmt.Println(str, "  1")
+            	fmt.Println("2")
+            	m1()
+            	fmt.Println("3")
+            	str = "Complex"
+            	fmt.Println(str, "  1")
+            	fmt.Println("4")
+            }
+            
+            func m1(){
+            	defer fmt.Println("m1- defer -line")
+            
+            	fmt.Println("m1 - 1")
+            	fmt.Println("m1 - 2")
+            }
+Lab6 - Demo2/Lab1.go - closure
+            package main
+            import "fmt"
+            func adder() func(int) int {
+            	fmt.Println("Adder invoked ")
+            	sum := 0
+            	return func(x int) int {
+            		fmt.Println("in return function")
+            		sum += x
+            		return sum
+            	}
+            }
+            
+            func main(){
+            	fnref := adder()
+            	fmt.Println(fnref)
+            	fmt.Println(fnref(10))
+            	fmt.Println(fnref(10))
+            	fmt.Println(fnref(10))
+            	fmt.Println(fnref(10))
+            	
+            }
 Lab5 - show fib series of 10 numbers 
 Lab4 -  named return, multiple returns, _
             package main
