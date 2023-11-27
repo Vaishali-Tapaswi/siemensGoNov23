@@ -1,4 +1,20 @@
-Lab8 - struct
+Lab9 - Create Struct as Emp
+            Empno int, Ename String, Salary int
+            2 functions
+                        incrSalary(int percent)
+                        print ()
+Lab8 - struct -Modify function to receiver methods 
+            func (p *Point) shift( x int, y int) {
+            	fmt.Println("Start of Shift ", p)
+            	p.X += x 
+            	p.Y += y
+            	fmt.Println("End of Shift ", p)
+                        }
+            func (p1 Point) print(){
+                        fmt.Printf("Point - x = %d, y = %d", p1.X, p1.Y)
+            }
+
+
             Modify code to have two functions 
                         1. shift - accept two inputs and modify point accordingly
                         2. print - just to print point details
