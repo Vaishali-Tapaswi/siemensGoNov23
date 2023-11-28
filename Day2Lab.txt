@@ -1,3 +1,24 @@
+Lab5 - http get request
+            package main
+            import (
+            	"fmt"
+            	"os"
+            	"net/http"
+            	"io"
+            )
+            func main(){
+            	str :="https://reqres.in/api/users/" + os.Args[1]
+            	fmt.Println("URL = " , str)
+            	resp, err := http.Get(str)
+            	fmt.Println("Resp = ", resp, ", Error = " , err)
+            	if err != nil {
+            		fmt.Println("Error ", err)
+            	} else{
+            		defer resp.Body.Close()
+            		body, err := io.ReadAll(resp.Body)
+            		fmt.Println("Body = ", string(body), ", Error = " , err)
+            	}
+            }
 Lab4 - library
       create a new folder demo4
       create Lab1.go
