@@ -1,3 +1,62 @@
+Lab10 - sync problem
+            package main
+            import (
+            	"fmt"
+            	"time"
+            )
+            type Bank struct{
+            	Bal int
+            }
+            func main(){
+            	fmt.Println("start of main")
+            	bank := Bank{}
+            	go deposit(&bank, 50)
+            	go widraw(&bank, 50)
+            	time.Sleep(15 * time.Second)
+            	fmt.Println("end of main, current balance = " , bank.Bal) 
+            
+            }
+            
+            func deposit(bank *Bank, cnt int){
+            	for i:=0; i<cnt;i++{
+            		curbal := bank.Bal + 1
+            		fmt.Println("in deposit - current balance is  ", bank.Bal)
+            		time.Sleep(15 * time.Millisecond)
+            		bank.Bal = curbal
+            	}
+            }
+            
+            func widraw(bank *Bank, cnt int){
+            	for i:=0; i<cnt;i++{
+            		curbal := bank.Bal - 1
+            			fmt.Println("in widraw - current balance is  ", bank.Bal)
+            		time.Sleep(100 * time.Millisecond)
+            		bank.Bal = curbal
+            	}
+            }
+Lab 9 - go routine1(Demo6/Lab1.go)
+            package main
+            import (
+            	"fmt"
+            	"time"
+            )
+            func main(){
+            	fmt.Println("start of main")
+            	go print("-",500) 
+            	go print("*",500) 
+            	
+            	fmt.Println("end of main") 
+            	// 3 options to stop main method 
+            //	for{}
+            	time.Sleep(1 * time.Second)
+            //	scan -> stop to accept some input
+            }
+            func print(str string, cnt int){
+            	for i:=0; i<cnt;i++{
+            		fmt.Print(str, "  ")
+            	}
+            }
+
 Lab8 - postgres
             package main
             import (
