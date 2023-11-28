@@ -1,3 +1,30 @@
+Lab11 - channel
+            package main
+            import (
+            	"fmt"
+            	"strconv"
+            //	"time"
+            )
+            func main(){
+            	ch := make(chan string)
+            
+            	fmt.Println("start of main")
+            	go print("Hello",5,ch) 
+            	fmt.Println("end of main") 
+            	
+            	fmt.Println("\n\nreceived from channel " , <-ch)
+            	fmt.Println("\n\nreceived from channel " , <-ch)
+            	fmt.Println("\n\nreceived from channel " , <-ch)
+            }
+            
+            
+            func print(str string, cnt int, ch chan string){
+            	for i:=0; i<cnt;i++{
+            		fmt.Print(str,i, "  ")
+            		ch <- str + strconv.Itoa(i)
+            	}
+            }
+
 Lab10 - sync problem
             package main
             import (
