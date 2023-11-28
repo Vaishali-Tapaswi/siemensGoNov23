@@ -1,3 +1,29 @@
+Lab8 - postgres
+            package main
+            import (
+            	"database/sql"
+            	_ "github.com/lib/pq"
+            	"fmt"
+            	
+            )
+            
+            func main() {
+            
+            	connStr := "postgres://postgres:postgres@localhost/pqgotest?sslmode=verify-full"
+            	db, err := sql.Open("postgres", connStr)
+            	if err != nil {
+            		fmt.Println("Error " , err)
+            	}else{
+            		fmt.Println("Db ", db)
+            	}
+            }
+            1. create module
+            2. change gopath 
+            3. tidy (observe downloaded files at gopath)
+            4. run and check db connection
+            5. Emp table - empno int, ename String, salary int
+                        insert
+                        list all records 
 Lab7 - Http Server
             package main
             
