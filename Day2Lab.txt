@@ -1,3 +1,38 @@
+Lab3 - cap vs len
+      package main
+      import "fmt"
+      func main(){
+      	//slice := make(type)
+      	slice1 := make([]string,5)
+      	
+      	fmt.Println("Slice1 Length  = " , len(slice1), " capacity = ", cap(slice1))
+      	fmt.Println (slice1)
+      	slice1[0] = "aaa"
+      	slice1[1] = "bbb"
+      	slice1[2] = "ccc"
+      	slice1[3] = "ddd"
+      	slice1[4] = "eee"
+      	fmt.Println("Slice1 Length  = " , len(slice1), " capacity = ", cap(slice1))
+      	fmt.Println (slice1)
+      
+      	slice1 = append(slice1,"fff")
+      	fmt.Println("Slice1 Length  = " , len(slice1), " capacity = ", cap(slice1))
+      	fmt.Println (slice1)
+      	slice1 = append(slice1,"a")
+      	slice1 = append(slice1,"b")
+      	slice1 = append(slice1,"c")
+      	slice1 = append(slice1,"d")
+      	fmt.Println("Slice1 Length  = " , len(slice1), " capacity = ", cap(slice1))
+      	fmt.Println (slice1)
+      	slice1 = append(slice1,"11")
+      	fmt.Println("Slice1 Length  = " , len(slice1), " capacity = ", cap(slice1))
+      	fmt.Println (slice1)
+      	for i, v := range slice1 {
+      		fmt.Printf("%d = %s\n", i, v)
+      	}
+      
+      }
+
 Lab2 - create slice from array 
       package main
       import "fmt"
