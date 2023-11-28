@@ -1,0 +1,34 @@
+Lab2 - create slice from array 
+      package main
+      import "fmt"
+      func main(){
+      	primes := [6]int{2, 3, 5, 7, 11, 13}
+      	fmt.Println(primes)
+      //	primes[1] = 300
+      	fmt.Printf("primes is of %T \n\n", primes)
+      	fmt.Println("Length  = " , len(primes), " capacity = ", cap(primes))
+      	
+      	slice1 := primes[0:3]
+      	fmt.Println("Slice1[0:3] Length  = " , len(slice1), " capacity = ", cap(slice1))
+      	fmt.Println(slice1)
+      	slice1[3]=444
+      	slice2 := primes[5:6]
+      	slice2[0]=5555
+      	fmt.Println("Slice2[5:6] Length  = " , len(slice2), " capacity = ", cap(slice2))
+      	fmt.Println(slice2)
+      	fmt.Println(primes)
+      	
+      
+      }
+Lab1 - Array vs Slice 
+      package main
+        import "fmt"
+        func main(){
+        	primes := [6]int{2, 3, 5, 7, 11, 13}
+        	fmt.Println(primes)
+        	primes[1] = 300
+        	fmt.Println(primes)
+        	fmt.Printf("primes is of %T \n\n", primes)
+        //	primes[9] = 4000
+        	fmt.Println(len(primes))
+        }
