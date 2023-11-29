@@ -1,0 +1,23 @@
+Lab3 - https://mholt.github.io/json-to-go/
+      https://reqres.in/api/users/2
+      Write code to fetch user details(accept userid as argument), unmarshal, show email address of user
+Lab2 - Write unmarshal
+      package main
+        import (
+        	"fmt"
+        	"encoding/json"
+        )
+        type Emp struct{
+        	Empno int `json:"eno"`
+        	Ename string `json:"empname"`
+        	Salary int `json:"salary"`
+        }
+        func main(){
+        	e1 := Emp{1,"One",1111}
+        	bytes, err := json.Marshal(e1)
+        	fmt.Println("Bytes =  ", string(bytes), ", Error = ", err)
+        }
+
+
+Lab1 - https://martinfowler.com/articles/microservices.html
+       https://www.youtube.com/watch?v=wgdBVIX9ifA
