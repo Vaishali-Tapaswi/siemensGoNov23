@@ -1,3 +1,43 @@
+Lab3 - create object of Emp and print 
+      package main
+      
+      import (
+      //	"encoding/json"
+      	"fmt"
+      //	"io"
+      	"net/http"
+      //	"os"
+      )
+      type Emp struct{
+      	Empno int `json:"eno"`
+      	Ename string `json:"empname"`
+      	Salary int `json:"salary"`
+      }
+      func main() {
+      
+      	
+      	http.HandleFunc("/emp", 
+      		func(w http.ResponseWriter, r *http.Request) {
+      		 fmt.Println("in handlefunc of emp, method =  " , r.Method)
+      		 switch r.Method{
+      		 case "GET":
+      			fmt.Println("in get")
+      			fmt.Fprintf(w, "GET, %q", r.URL.Path)	
+      		case "POST":
+      			fmt.Println("in post")
+      			fmt.Fprintf(w, "post, %q", r.URL.Path)	
+      			// request. Body or  GetBody func() (io.ReadCloser, error)
+      			//Read(p []byte) (n int, err error)
+      			//convert byte array to struct (Unmarshal)
+      		default:
+      			fmt.Println("in default")
+      			fmt.Fprintf(w, "default, %q", r.URL.Path)	
+      		}
+      	})
+      
+      	http.ListenAndServe(":8080", nil)
+      }
+
 Lab2 - https://mholt.github.io/json-to-go/
       https://reqres.in/api/users/2
       Write code to fetch user details(accept userid as argument), unmarshal, show email address of user
