@@ -1,7 +1,7 @@
-Lab3 - https://mholt.github.io/json-to-go/
+Lab2 - https://mholt.github.io/json-to-go/
       https://reqres.in/api/users/2
       Write code to fetch user details(accept userid as argument), unmarshal, show email address of user
-Lab2 - Write unmarshal
+Lab1 - Write unmarshal
       package main
         import (
         	"fmt"
@@ -19,5 +19,5 @@ Lab2 - Write unmarshal
         }
 
 
-Lab1 - https://martinfowler.com/articles/microservices.html
+MicroServices - https://martinfowler.com/articles/microservices.html
        https://www.youtube.com/watch?v=wgdBVIX9ifA
