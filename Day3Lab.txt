@@ -1,3 +1,58 @@
+Lab5 - Mocking with testify
+	Lab2.go
+		package main
+		
+		import (
+		    "fmt"
+		)
+		type Emp struct{}
+		func (c *Emp) modify(key,value string)string{
+			fmt.Println("Connecting to Postgres server to get data from Emp")
+			return value
+		}
+		
+		func main() {
+		    fmt.Println("Hello World")
+			e := Emp{}
+			e.modify("appname","Lab8")
+		}
+	Lab2_test.go
+		package main
+		
+		import (
+		    "fmt"
+		    "testing"
+			"github.com/stretchr/testify/assert"
+			"github.com/stretchr/testify/mock"
+		)
+		
+		type EmpMock struct {
+		    mock.Mock
+		}
+		
+		func (c *EmpMock) modify(key,value string)string{
+			fmt.Println("Modify Mock, don't connect to redis")
+			args := c.Called(key,value)
+			x:= args.String(0)
+			return x;
+		}
+		func TestModifyMock(t *testing.T) {
+			empmock := new(EmpMock)
+			fmt.Println("initialized Redis Mock")
+			empmock.On("modify","uname","Vaishali").Return("Vaishali")
+			empmock.On("modify","uname","Tapaswi").Return("Tapaswi")
+			assert.Equal(t, empmock.modify("uname","Vaishali"),"Vaishali")
+			assert.Equal(t, empmock.modify("uname","Tapaswi"),"Tapaswi")
+			}
+		/*
+		func TestModify(t *testing.T) {
+			emp:= Emp{}
+			fmt.Println("Direct invoke, no mocking")
+			assert.Equal(t, emp.modify("uname","Vaishali"),"Vaishali")
+			assert.Equal(t, emp.modify("uname","Tapaswi"),"Tapaswi")
+		   }
+		*/
+	cmd> mod init, tidy, test
 Lab4 - testing (demo8)
 	Lab1.go 
 		package main
