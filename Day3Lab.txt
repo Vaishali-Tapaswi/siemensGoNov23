@@ -1,42 +1,56 @@
 Lab3 - create object of Emp and print 
-      package main
-      
-      import (
-      //	"encoding/json"
-      	"fmt"
-      //	"io"
-      	"net/http"
-      //	"os"
-      )
-      type Emp struct{
-      	Empno int `json:"eno"`
-      	Ename string `json:"empname"`
-      	Salary int `json:"salary"`
-      }
-      func main() {
-      
-      	
-      	http.HandleFunc("/emp", 
-      		func(w http.ResponseWriter, r *http.Request) {
-      		 fmt.Println("in handlefunc of emp, method =  " , r.Method)
-      		 switch r.Method{
-      		 case "GET":
-      			fmt.Println("in get")
-      			fmt.Fprintf(w, "GET, %q", r.URL.Path)	
-      		case "POST":
-      			fmt.Println("in post")
-      			fmt.Fprintf(w, "post, %q", r.URL.Path)	
-      			// request. Body or  GetBody func() (io.ReadCloser, error)
-      			//Read(p []byte) (n int, err error)
-      			//convert byte array to struct (Unmarshal)
-      		default:
-      			fmt.Println("in default")
-      			fmt.Fprintf(w, "default, %q", r.URL.Path)	
-      		}
-      	})
-      
-      	http.ListenAndServe(":8080", nil)
-      }
+    package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+//	"os"
+//	"io/ioutil"
+)
+type Emp struct{
+	Empno int `json:"eno"`
+	Ename string `json:"empname"`
+	Salary int `json:"salary"`
+}
+func main() {
+	empslice := make([]Emp,0)
+	
+	http.HandleFunc("/emp", 
+		func(w http.ResponseWriter, r *http.Request) {
+		 fmt.Println("in handlefunc of emp, method =  " , r.Method)
+		 switch r.Method{
+		 case "GET":
+			fmt.Println("in get")
+			fmt.Fprintf(w, "GET, %q", r.URL.Path)	
+			// slice.marshal ->
+			//	e1 := Emp{1,"One",1111}
+			//bytes, err := json.Marshal(e1)
+
+			// w.Write([]byte) (int, error)
+		case "POST":
+			fmt.Println("in post", r.Body)
+			fmt.Fprintf(w, "post, %q", r.URL.Path)	
+			bodycontent, _ := io.ReadAll(r.Body)
+			var emp Emp 
+			_ = json.Unmarshal(bodycontent, &emp)
+			empslice = append(empslice, emp) 
+
+			fmt.Println("in emp details", emp)
+			
+			fmt.Println("in emp slice", empslice)
+			
+			//convert byte array to struct (Unmarshal)
+		default:
+			fmt.Println("in default")
+			fmt.Fprintf(w, "default, %q", r.URL.Path)	
+		}
+	})
+
+	http.ListenAndServe(":8080", nil)
+}
+
 
 Lab2 - https://mholt.github.io/json-to-go/
       https://reqres.in/api/users/2
