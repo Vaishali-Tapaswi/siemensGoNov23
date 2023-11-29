@@ -1,3 +1,72 @@
+Lab4 - testing (demo8)
+	Lab1.go 
+		package main
+		import (
+			"fmt"
+			"strconv"
+		)
+		func add(i,j int)int{
+			fmt.Println("add invoked with " , i ," and " ,j)
+			return i+j
+		}
+		func divide(str1,str2 string) int {
+			no1,_ := strconv.Atoi(str1)
+			no2,_ := strconv.Atoi(str2)
+			return no1/no2
+		}
+		func main(){
+			fmt.Println("add of 10 and 10 is " , add(10,10))
+			fmt.Println("divide of 100 and 10 is " , divide("100","10"))
+			fmt.Println("divide of a and 10 is " , divide("a","10"))
+			fmt.Println("divide of 100 and a is " , divide("100","a"))
+		}
+	Lab1_test.go
+		package main
+		import (
+		//	"fmt"
+			"testing"
+		)
+		
+		/*
+		func TestAdd(t *testing.T){
+			got := add(10,10)
+		    if got != 20 {
+		        t.Errorf("add(10,20) = %d; want 20", got)
+		    }
+		}
+		*/
+		func TestDivide(t *testing.T){
+			got := divide("100","10")
+		    if got != 10 {
+		        t.Errorf("divide(100,10) = %d; want 10", got)
+		    }
+		}
+		func TestDivide1(t *testing.T){
+			got := divide("a","10")
+		    if got != 0 {
+		        t.Errorf("divide('a',10) = %d; want 0", got)
+		    }
+		}
+		func TestDivide0(t *testing.T){
+			// divide by 0 -> panic
+			defer func() {
+		        if r := recover(); r == nil {
+		            t.Errorf("divide('10','0') has not given panic")
+		        }
+		    }()
+		divide("10","0")
+		}
+	cmd>go test Lab1_test.go 
+		check error
+	cmd>go test Lab1_test.go Lab1.go 
+	cmd>go test -v Lab1_test.go Lab1.go
+	cmd>go test -v -cover  Lab1_test.go Lab1.go
+		coverage %age
+	cmd>go test -v -cover  Lab1_test.go Lab1.go -coverprofile tmp.txt
+		observe tmp.txt
+	cmd>go tool cover -html=tmp.txt -o tmp.html
+		open/read tmp.html
+	
 Lab3 With decoder 
 	package main
 	
