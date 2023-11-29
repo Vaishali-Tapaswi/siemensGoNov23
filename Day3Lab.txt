@@ -1,3 +1,45 @@
+Lab3 With decoder 
+	package main
+	
+	import (
+		"encoding/json"
+		"fmt"
+		"net/http"
+	)
+	
+	type Emp struct {
+		Empno  int    `json:"eno"`
+		Ename  string `json:"empname"`
+		Salary int    `json:"salary"`
+	}
+	
+	func main() {
+		empslice := make([]Emp, 0)
+	
+		http.HandleFunc("/emp",
+			func(w http.ResponseWriter, r *http.Request) {
+				fmt.Println("in handlefunc of emp, method =  ", r.Method)
+				switch r.Method {
+				case "GET":
+					bytes, _ := json.Marshal(empslice)
+					w.Write(bytes)
+				case "POST":
+					decoder := json.NewDecoder(r.Body)
+					var emp Emp
+					_ = decoder.Decode(&emp)
+					//bodycontent, _ := io.ReadAll(r.Body)
+					//_ = json.Unmarshal(bodycontent, &emp)
+					empslice = append(empslice, emp)
+	
+				default:
+					fmt.Println("in default")
+					fmt.Fprintf(w, "default, %q", r.URL.Path)
+				}
+			})
+	
+		http.ListenAndServe(":8080", nil)
+	}
+
 Lab3 - create object of Emp and print 
     package main
 
