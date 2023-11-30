@@ -1,0 +1,46 @@
+Lab1 -  factory, change factory method to return error 
+        package main
+        import "fmt"
+        type Driver interface{
+        	open()
+        	close()
+        }
+        type OracleDriver struct{
+        }
+        func (ora OracleDriver) close(){
+        	fmt.Println("OracleDriver close method")
+        }
+        func (ora OracleDriver) open(){
+        	fmt.Println("OracleDriver open method")
+        }
+        type MySQLDriver struct{
+        }
+        func (my MySQLDriver) open1(){
+        	fmt.Println("MySQLDriver open1 method")
+        }
+        func (my MySQLDriver) close(){
+        	fmt.Println("MySQLDriver close method")
+        }
+        func (my MySQLDriver) open(){
+        	fmt.Println("MySQLDriver open method")
+        }
+        
+        type Db struct{
+        
+        }
+        func (db Db) getConnection(str string) (Driver){
+        	if str=="ora"{
+        		return OracleDriver{}
+        	}
+        	if str=="mysql"{
+        		return MySQLDriver{}
+        	}
+        	return nil
+        }
+        func main(){
+        	var driver Driver
+        	db := Db{}
+        	driver = db.getConnection("xxx")
+        	driver.open()
+        	driver.close()
+        }
