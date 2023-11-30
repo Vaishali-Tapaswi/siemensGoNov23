@@ -1,3 +1,71 @@
+Lab12 - create a lib as dblib
+            conn.go ->open connection and return db or err
+                        -> confirm defer close
+            struct.go
+                        emp
+            empdb.go
+                create (emp) err
+                read(filter string) []emp
+
+	Emp (primary key)-> err or success
+	Emp (details) primary key 
+
+	R(filter string, key,value)  Emp slice
+	
+	U (new Emp) -> err 
+	D (empno)-> err
+-------------
+
+1. Load properties file (connection string)
+2. structs 
+	Emp
+            3. empdao Postgres
+            package main
+            import (
+            	"database/sql"
+            	_ "github.com/lib/pq"
+            	"fmt"
+            	
+            )
+            
+            
+            func main() {
+            
+            	connStr := "postgres://postgres:postgres@localhost/postgres?sslmode=disable"
+            	db, err := sql.Open("postgres", connStr)
+            	if err != nil {
+            		fmt.Println("Error " , err)
+            	}else{
+            		fmt.Println("Db ", db)
+            	}
+            	defer db.Close()	
+            	rowcnt, err := db.Exec(`INSERT INTO emp(empno, ename, salary)
+            		VALUES(2, 'Two', 2222) `)
+            	fmt.Println("Number of rows inserted ",rowcnt, ", \nerror  = " , err, "\n\n")
+            
+            	rows, err := db.Query(`SELECT * FROM emp`)
+            	
+            	if err != nil {
+                    fmt.Println("errir " , err)
+                }
+                defer rows.Close()
+            	fmt.Println("\t\tEmpNo\tEname\tSalary")
+            	
+                for rows.Next() {
+                    var (
+                        empno   int64
+                        ename string
+                        salary int64
+                    )
+                    if err := rows.Scan(&empno, &ename, &salary); err != nil {
+                        fmt.Print(err)
+                    }
+                    fmt.Printf("\t\t%d\t%s\t%d\n", empno, ename, salary)
+                }
+            
+            }
+
+
 Lab11 - channel
             package main
             import (
