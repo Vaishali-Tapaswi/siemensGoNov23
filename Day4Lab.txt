@@ -1,3 +1,70 @@
+Lab4 - Observer
+        package main
+
+        import "fmt"
+        
+        //1. Create Interface for View
+        type View interface {
+        	Draw(cnt int)
+        }
+        
+        //2. Multiple Implementations for views
+        type PieChart struct {
+        }
+        func (p PieChart) Draw(cnt int) {
+        	fmt.Println("PieChart Draw invoked with ", cnt)
+        }
+        
+        type BarGraph struct {
+        }
+        func (b BarGraph) Draw(cnt int) {
+        	fmt.Println("BarGraph Draw  invoked with ", cnt)
+        }
+        
+        //3. Observer
+        type Observer struct {
+        	views []View
+        }
+        
+        func (ob *Observer) addView(view View) {
+        	ob.views = append(ob.views, view)
+        }
+        func (ob *Observer) update(cnt int) {
+        	for _, v := range ob.views {
+        		v.Draw(cnt)
+        	}
+        }
+        
+        //4. DataItem
+        type DataItem struct {
+        	cnt      int
+        	observer Observer
+        }
+        
+        func (dataitem *DataItem) setObserver(observer Observer) {
+        	dataitem.observer = observer
+        }
+        func (dataitem *DataItem) setCnt(cnt int) {
+        	if dataitem.cnt != cnt {
+        		dataitem.cnt = cnt
+        		dataitem.observer.update(dataitem.cnt)
+        	}
+        }
+        
+        //4. Main method
+        func main() {
+        	obs := Observer{}
+        	v1, v2, v3 := PieChart{}, BarGraph{}, PieChart{}
+        	obs.addView(View(v1))
+        	obs.addView(v2)
+        	obs.addView(v3)
+        	dataitem := DataItem{}
+        	dataitem.setObserver(obs)
+        	dataitem.setCnt(40)
+        	dataitem.setCnt(50)
+        	dataitem.setCnt(50)
+        }
+
 Lab3 - https://www.dofactory.com/net/strategy-design-pattern
         
         strategy.go
