@@ -1,3 +1,37 @@
+Lab2 - create client(main method) and create lib(mod init, tidy, replace)
+        package mylib
+        
+        import (
+            "fmt"
+            "sync"
+        )
+        
+        type single struct {
+        	cnt int
+         }
+        func (s *single) Add() int{
+        	s.cnt++
+        	return s.cnt
+        }
+        var lock = &sync.Mutex{}
+        var singleInstance *single
+        
+        func GetInstance() *single {
+            if singleInstance == nil {
+                lock.Lock()
+                defer lock.Unlock()
+                if singleInstance == nil {
+                    fmt.Println("Creating single instance now.")
+                    singleInstance = &single{}
+                } else {
+                    fmt.Println("Single instance already created.")
+                }
+            } else {
+                fmt.Println("Single instance already created.")
+            }
+            return singleInstance
+        }
+        
 Lab1 -  factory, change factory method to return error 
         package main
         import "fmt"
