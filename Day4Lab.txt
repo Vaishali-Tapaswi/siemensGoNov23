@@ -1,3 +1,40 @@
+Lab3 - https://www.dofactory.com/net/strategy-design-pattern
+        
+        strategy.go
+        package main
+        import "fmt"
+        
+        func main(){
+        	var ss SortStrategy
+        	ss = BubbleSort{}
+        	sortlist := SortedList{ss}
+        	sortlist.MySort()
+        
+        	sortlist.sortstrategy = ShellSort{}
+        	sortlist.MySort()
+        
+        }
+        type SortStrategy interface{
+        	 Sort()
+         }
+         type ShellSort struct{}
+         func (ss ShellSort) Sort(){
+        	 fmt.Println("Sort of ShellSort invoked ")
+         }
+         type BubbleSort struct{}
+         func (ss BubbleSort) Sort(){
+        	 fmt.Println("Sort of BubbleSort invoked ")
+         }
+           
+        type SortedList struct{
+        	sortstrategy SortStrategy 
+        }
+        func (sl SortedList) MySort(){
+        	fmt.Println("Accept 10 number")
+        	sl.sortstrategy.Sort()
+        	fmt.Println("Print Sorted numbers")
+        }
+
 Lab2 - create client(main method) and create lib(mod init, tidy, replace)
         client code
                 package main
