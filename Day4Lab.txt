@@ -1,4 +1,23 @@
 Lab2 - create client(main method) and create lib(mod init, tidy, replace)
+        client code
+                package main
+                import (
+                	"fmt"
+                	"mylib"
+                )
+                
+                func main(){
+                	s1 := mylib.GetInstance()
+                	fmt.Println("s1 " , s1.Add())
+                	fmt.Println("s1 " , s1.Add())
+                	fmt.Println("s1 " , s1.Add())
+                	fmt.Println("s1 " , s1.Add())
+                	fmt.Println("s1 " , s1.Add())
+                	s2 := mylib.GetInstance()
+                	fmt.Println("s2 " , s2.Add())
+                	fmt.Println("s2 " , s2.Add())
+                }
+
         package mylib
         
         import (
