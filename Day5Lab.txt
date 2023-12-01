@@ -1,3 +1,9 @@
+Lab4 - Demo13 - (mux)
+		/ -> show main page (hlink emp and dept)
+		register EmpHandler and DeptHandler
+			emp -> get /post
+			dept -> put/delete 
+
 Lab3- 	
 
 	create a folder Demo12
