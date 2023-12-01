@@ -1,0 +1,9 @@
+Lab1 - GoLicenses
+	git clone https://github.com/google/go-licenses  (download)
+	cd go-licenses
+	Download required modules:
+	go mod download/tidy
+	go build . 
+	
+	in your project dir 
+		go-licenses.exe report .
