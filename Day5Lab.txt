@@ -1,9 +1,8 @@
 Lab3- 	
 
 	create a folder Demo12
-	create Lab1.go
 		package main
-
+		
 		import (
 			//  "database/sql"
 			"fmt"
@@ -52,13 +51,12 @@ Lab3-
 			for {
 				select {
 				case e := <-n.listener.Notify:
-					fmt.Println("in listenernotify" , e)
+					fmt.Println("in listenernotify", e)
 					if e == nil {
 						continue
 					}
 					fetchCounter++
-					data <- []byte(e.Extra)
-					fmt.Println("Fetched DAta  ", []byte(e.Extra))
+					fmt.Println("Current Count ", fetchCounter)
 				case err := <-n.failed:
 					fmt.Println("in err")
 					return err
@@ -82,6 +80,7 @@ Lab3-
 			notifier.fetch(mychan)
 			notifier.listener.Listen("demo1")
 		}
+
 
 	create module and run code
 		postgres database -> create function, create trigger to send notification
