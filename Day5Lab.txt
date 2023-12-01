@@ -1,3 +1,85 @@
+Lab3- 	create a folder Demo12
+	create Lab1.go
+		package main
+		
+		import (
+			//  "database/sql"
+			"fmt"
+			"github.com/lib/pq"
+			"time"
+		)
+		
+		// notifier encapsulates the state of the listener connection.
+		type notifier struct {
+			listener *pq.Listener
+			failed   chan error
+		}
+		
+		func newNotifier(dsn, channelName string) (*notifier, error) {
+			n := &notifier{failed: make(chan error, 2)}
+		
+			listener := pq.NewListener(
+				dsn,
+				10*time.Second, time.Minute,
+				n.logListener)
+		
+			if err := listener.Listen(channelName); err != nil {
+				listener.Close()
+				fmt.Println("ERROR!:", err)
+				return nil, err
+			}
+		
+			n.listener = listener
+			return n, nil
+		}
+		
+		// logListener is the state change callback for the listener.
+		func (n *notifier) logListener(event pq.ListenerEventType, err error) {
+			fmt.Println("in logListener event = ", event, " err = ", err)
+			if event == pq.ListenerEventConnectionAttemptFailed {
+				n.failed <- err
+				fmt.Println("Error in logListener : ", err)
+			}
+		}
+		
+		// fetch is the main loop of the notifier to receive data from
+		// the database in JSON-FORMAT and send it down the send channel.
+		func (n *notifier) fetch(data chan []byte) error {
+			fmt.Println("in fetch")
+			var fetchCounter uint64
+			for {
+				select {
+				case e := <-n.listener.Notify:
+					if e == nil {
+						continue
+					}
+					fetchCounter++
+					data <- []byte(e.Extra)
+					fmt.Println("FETCHED DAta", []byte(e.Extra))
+				case err := <-n.failed:
+					return err
+				case <-time.After(time.Minute):
+					go n.listener.Ping()
+				}
+			}
+		}
+	create module and run code
+	postgres database -> create function, create trigger to send notification
+		// close closes the notifier.
+		func (n *notifier) close() error {
+			close(n.failed)
+			return n.listener.Close()
+		}
+		func main() {
+			sqlstr := "postgres://postgres:postgres@localhost/postgres?sslmode=disable"
+			var mychan chan []byte
+			notifier, error := newNotifier(sqlstr, "mychan")
+			fmt.Println("notifier ", notifier, "err ", error)
+			notifier.fetch(mychan)
+			notifier.listener.Listen("demo1")
+		}
+
+
 Lab2 - https://medium.com/learning-the-go-programming-language/writing-modular-go-programs-with-plugins-ec46381ee1a9
 	Run -> 1. no parameter
 	       2. swe (valid switch case but invalid module)
