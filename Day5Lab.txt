@@ -1,7 +1,9 @@
-Lab3- 	create a folder Demo12
+Lab3- 	
+
+	create a folder Demo12
 	create Lab1.go
 		package main
-		
+
 		import (
 			//  "database/sql"
 			"fmt"
@@ -50,21 +52,23 @@ Lab3- 	create a folder Demo12
 			for {
 				select {
 				case e := <-n.listener.Notify:
+					fmt.Println("in listenernotify" , e)
 					if e == nil {
 						continue
 					}
 					fetchCounter++
 					data <- []byte(e.Extra)
-					fmt.Println("FETCHED DAta", []byte(e.Extra))
+					fmt.Println("Fetched DAta  ", []byte(e.Extra))
 				case err := <-n.failed:
+					fmt.Println("in err")
 					return err
 				case <-time.After(time.Minute):
+					fmt.Println("in time.after")
 					go n.listener.Ping()
 				}
 			}
 		}
-	create module and run code
-	postgres database -> create function, create trigger to send notification
+		
 		// close closes the notifier.
 		func (n *notifier) close() error {
 			close(n.failed)
@@ -78,6 +82,26 @@ Lab3- 	create a folder Demo12
 			notifier.fetch(mychan)
 			notifier.listener.Listen("demo1")
 		}
+
+	create module and run code
+		postgres database -> create function, create trigger to send notification
+	on pd admin
+		CREATE OR REPLACE FUNCTION demo1()
+		  RETURNS TRIGGER 
+		  LANGUAGE PLPGSQL
+		  AS
+		$$
+		BEGIN
+			PERFORM pg_notify('mychan', 'Message');
+			RETURN NEW;
+		END;
+		$$
+	
+	CREATE TRIGGER rowinserted
+	  AFTER INSERT
+	  ON emp
+	  FOR EACH ROW
+	  EXECUTE PROCEDURE demo1();
 
 
 Lab2 - https://medium.com/learning-the-go-programming-language/writing-modular-go-programs-with-plugins-ec46381ee1a9
