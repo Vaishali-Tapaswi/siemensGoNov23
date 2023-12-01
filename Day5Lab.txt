@@ -1,3 +1,9 @@
+Lab2 - https://medium.com/learning-the-go-programming-language/writing-modular-go-programs-with-plugins-ec46381ee1a9
+	Run -> 1. no parameter
+	       2. swe (valid switch case but invalid module)
+	       3. invalid function call / invalid interface
+
+
 Lab1 - GoLicenses
 	git clone https://github.com/google/go-licenses  (download)
 	cd go-licenses
